@@ -8,7 +8,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function(){
-            emailjs.init("YOUR_PUBLIC_KEY"); // Du må erstatte dette med din egen EmailJS public key
+            emailjs.init("DGfnuYvUm0XcqWjtR"); // Du må erstatte dette med din egen EmailJS public key
         })();
     </script>
     <style>
@@ -686,10 +686,6 @@
                 display: none;
             }
 
-            .robot-left {
-                display: none;
-            }
-
             .btn-secondary {
                 margin-left: 0;
                 margin-top: 1rem;
@@ -698,11 +694,6 @@
             .nav-links {
                 width: 100%;
                 justify-content: center;
-                gap: 1rem;
-            }
-
-            .nav-links a {
-                font-size: 0.8rem;
             }
 
             .order-form {
@@ -711,85 +702,6 @@
 
             .section-title {
                 font-size: 2rem;
-            }
-
-            .product-card {
-                padding: 1.5rem;
-            }
-
-            .product-features li {
-                font-size: 0.9rem;
-            }
-
-            .hero {
-                min-height: auto;
-                padding: 2rem 0;
-            }
-
-            .hero-description {
-                font-size: 1rem;
-            }
-
-            .btn {
-                padding: 0.9rem 2rem;
-                font-size: 0.85rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .logo {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .product-price {
-                font-size: 1.5rem;
-            }
-
-            .product-icon {
-                font-size: 3rem;
-            }
-
-            .nav-links {
-                gap: 0.5rem;
-            }
-
-            .nav-links a {
-                font-size: 0.7rem;
-            }
-
-            .order-form {
-                padding: 1.5rem;
-            }
-
-            input, select, textarea {
-                font-size: 0.9rem;
-                padding: 0.8rem;
-            }
-
-            label {
-                font-size: 0.8rem;
-            }
-
-            .btn {
-                width: 100%;
-                margin: 0.5rem 0;
-            }
-
-            .btn-secondary {
-                margin-left: 0;
             }
         }
     </style>
@@ -865,11 +777,11 @@
                         <li>Batteripakke (aaa)</li>
                         <li>Mikrocontroller med Wi-Fi/Bluetooth</li>
                         <li>Alle kabler og monteringsdeler</li>
-                        <li>Åpen kildekode og Arduino IDE veiledning</li>
+                        <li>åpen kildekode og Aurduino IDE veiledning</li>
                         <li>Komplett byggeveiledning på norsk</li>
                         <li>Tilgang til online læringsplattform</li>
                     </ul>
-                    <div class="product-price">2.499,-</div>
+                    <div class="product-price">849,-</div>
                     <button class="btn btn-primary" onclick="selectProduct('SOSO Komplett Robotkitt', 849)">
                         <span>Bestill Nå!</span>
                     </button>
@@ -901,7 +813,7 @@
                     <div class="feature-icon">💻</div>
                     <h3 class="feature-title">Fleksibel Koding</h3>
                     <p class="feature-description">
-                        Åpen kildekode med Arduino IDE – og mulighet til videreutvikling
+                        Åpen kildekode med Aurduino IDE – og mulighet til videreutvikling
                     </p>
                 </div>
                 <div class="feature-item">
@@ -942,20 +854,13 @@
                         <label for="product">Velg Produkt</label>
                         <select id="product" name="product" required>
                             <option value="">-- Velg et kit --</option>
-                            <option value="komplett" data-price="849">SOSO Komplett Robotkitt - 849,-</option>
+                            <option value="komplett" data-price="2499">SOSO Komplett Robotkitt - 849,-</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="quantity">Antall</label>
                         <input type="number" id="quantity" name="quantity" min="1" value="1" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="total-price">Total Pris</label>
-                        <div style="padding: 1rem; background: rgba(255, 107, 53, 0.1); border-radius: 10px; border: 2px solid rgba(255, 107, 53, 0.3);">
-                            <span id="totalPrice" style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--primary);">849,-</span>
-                        </div>
                     </div>
 
                     <div class="form-group">
@@ -1068,23 +973,7 @@
             // Send email using EmailJS
             emailjs.send('service_oh69nxg', 'template_qrwrtia', emailParams)
                 .then(function(response) {
-                    console.log('Order email sent successfully!', response.status, response.text);
-                    
-                    // Send confirmation email to customer
-                    const customerEmailParams = {
-                        to_email: data.email,
-                        to_name: data.name,
-                        from_name: data.name,
-                        product: productName,
-                        quantity: data.quantity,
-                        order_date: new Date().toLocaleString('no-NO')
-                    };
-                    
-                    // Send confirmation to customer
-                    return emailjs.send('service_oh69nxg', 'template_7yy2gfn', customerEmailParams);
-                })
-                .then(function(response) {
-                    console.log('Customer confirmation email sent!', response.status, response.text);
+                    console.log('SUCCESS!', response.status, response.text);
                     
                     // Show success message
                     const successMessage = document.getElementById('successMessage');
@@ -1092,6 +981,9 @@
                     
                     // Hide form
                     event.target.style.display = 'none';
+                    
+                    // Log order
+                    console.log('Order sent to isak70018@gmail.com:', data);
                     
                     // Reset form and button after delay
                     setTimeout(() => {
@@ -1101,8 +993,7 @@
                         submitButton.innerHTML = originalButtonText;
                         submitButton.disabled = false;
                     }, 30000);
-                })
-                .catch(function(error) {
+                }, function(error) {
                     console.log('FAILED...', error);
                     
                     // Fallback: create mailto link with order info
@@ -1154,31 +1045,7 @@ Bestilt: ${new Date().toLocaleString('no-NO')}
                 const price = parseInt(selectedOption.dataset.price);
                 const quantity = parseInt(this.value) || 1;
                 const total = price * quantity;
-                
-                // Update total price display
-                const totalPriceElement = document.getElementById('totalPrice');
-                if (totalPriceElement) {
-                    totalPriceElement.textContent = `${total.toLocaleString('no-NO')},-`;
-                }
-                
                 console.log(`Total: ${total},-`);
-            }
-        });
-
-        // Also update when product changes
-        document.getElementById('product')?.addEventListener('change', function() {
-            const quantityInput = document.getElementById('quantity');
-            const selectedOption = this.options[this.selectedIndex];
-            if (selectedOption && selectedOption.dataset.price) {
-                const price = parseInt(selectedOption.dataset.price);
-                const quantity = parseInt(quantityInput.value) || 1;
-                const total = price * quantity;
-                
-                // Update total price display
-                const totalPriceElement = document.getElementById('totalPrice');
-                if (totalPriceElement) {
-                    totalPriceElement.textContent = `${total.toLocaleString('no-NO')},-`;
-                }
             }
         });
 
@@ -1198,3 +1065,4 @@ Bestilt: ${new Date().toLocaleString('no-NO')}
     </script>
 </body>
 </html>
+
