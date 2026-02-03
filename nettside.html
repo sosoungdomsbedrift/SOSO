@@ -8,7 +8,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
         (function(){
-            emailjs.init("DGfnuYvUm0XcqWjtR"); // Du må erstatte dette med din egen EmailJS public key
+            emailjs.init("DGfnuYvUm0XcqWjtR");
         })();
     </script>
     <style>
@@ -40,7 +40,6 @@
             line-height: 1.6;
         }
 
-        /* Animated background grid */
         .grid-bg {
             position: fixed;
             top: 0;
@@ -61,7 +60,6 @@
             100% { transform: translate(50px, 50px); }
         }
 
-        /* Glowing orbs */
         .orb {
             position: fixed;
             border-radius: 50%;
@@ -121,10 +119,9 @@
 
         nav {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .logo {
@@ -138,6 +135,7 @@
             letter-spacing: 0.1em;
             text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
             animation: logoGlow 3s ease-in-out infinite;
+            text-align: center;
         }
 
         @keyframes logoGlow {
@@ -149,6 +147,8 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .nav-links a {
@@ -231,7 +231,6 @@
             line-height: 1.8;
         }
 
-        /* Interactive Buttons */
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
@@ -314,52 +313,115 @@
             border-color: var(--primary);
         }
 
-        /* Robot Image */
-        .robot-illustration {
+
+
+        /* Image Slider */
+        .image-slider {
+            padding: 6rem 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(245, 245, 245, 1) 100%);
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08);
+            background: white;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            padding: 3rem;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            max-height: 550px;
+            object-fit: contain;
+            border-radius: 15px;
+        }
+
+        .slider-nav {
             position: absolute;
-            right: -80%;
             top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
             transform: translateY(-50%);
-            width: 600px;
-            height: 600px;
-            animation: robotFloat 6s ease-in-out infinite;
+            padding: 0 1rem;
+            pointer-events: none;
+        }
+
+        .slider-btn {
+            background: white;
+            color: var(--primary);
+            border: 2px solid rgba(255, 107, 53, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            pointer-events: all;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            font-weight: 300;
+            line-height: 1;
         }
 
-        .robot-left {
-            position: absolute;
-            right: 90%;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 600px;
-            height: 600px;
-            animation: robotFloat 6s ease-in-out infinite;
+        .slider-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.3);
+        }
+
+        .slider-btn:active {
+            transform: scale(0.95);
+        }
+
+        .slider-dots {
             display: flex;
-            align-items: center;
             justify-content: center;
+            gap: 12px;
+            margin-top: 2.5rem;
         }
 
-
-        @keyframes robotFloat {
-            0%, 100% { transform: translateY(-50%) rotate(0deg); }
-            50% { transform: translateY(-55%) rotate(2deg); }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 107, 53, 0.2);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
         }
 
-        .robot-illustration img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 60px rgba(255, 107, 53, 0.4));
-            border-radius: 20px;
+        .dot:hover {
+            background: rgba(255, 107, 53, 0.4);
+            transform: scale(1.2);
         }
-        .robot-left img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 20px 60px rgba(255, 107, 53, 0.4));
-            border-radius: 20px;
+
+        .dot.active {
+            background: var(--primary);
+            transform: scale(1.4);
+            border-color: rgba(255, 107, 53, 0.3);
         }
 
         /* Products Section */
@@ -497,6 +559,19 @@
             text-align: center;
         }
 
+        .school-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
         /* Order Section */
         .order-section {
             padding: 6rem 0;
@@ -556,6 +631,18 @@
         textarea {
             resize: vertical;
             min-height: 120px;
+        }
+
+        .total-price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(217, 70, 239, 0.1));
+            border-radius: 15px;
+            border: 2px solid var(--primary);
         }
 
         /* Features Section */
@@ -640,7 +727,6 @@
             transform: scale(1.2);
         }
 
-        /* Success Message */
         .success-message {
             display: none;
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(217, 70, 239, 0.2));
@@ -673,15 +759,22 @@
         }
 
         /* Responsive */
-            @media (max-width: 768px){
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
             }
 
             .tagline {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
-            .robot-illustration {
-                display: none;
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.85rem;
             }
 
             .btn-secondary {
@@ -689,35 +782,73 @@
                 margin-top: 1rem;
             }
 
-            .nav-links {
-                width: 100%;
-                justify-content: center;
-            }
-
             .order-form {
-                padding: 2rem;
+                padding: 1.5rem;
             }
 
             .section-title {
                 font-size: 2rem;
             }
+
+            .product-price {
+                font-size: 1.5rem;
+            }
+
+            .total-price {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+            }
+
+            .slider-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .slide {
+                padding: 1.5rem;
+            }
+
+            .slider-container {
+                border-radius: 20px;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Background Effects -->
     <div class="grid-bg"></div>
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <!-- Header -->
     <header>
         <div class="container">
             <nav>
                 <div class="logo">SOSO UB</div>
                 <ul class="nav-links">
                     <li><a href="#home">Hjem</a></li>
+                    <li><a href="#gallery">Galleri</a></li>
                     <li><a href="#products">Produkter</a></li>
                     <li><a href="#features">Funksjoner</a></li>
                     <li><a href="#order">Bestill</a></li>
@@ -726,7 +857,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
@@ -740,31 +870,56 @@
                 <a href="#order" class="btn btn-primary"><span>Bestill Nå</span></a>
                 <a href="#products" class="btn btn-secondary"><span>Se Produkter</span></a>
             </div>
-
-            <!-- Robot Image -->
-            <div class="robot-illustration">
-                <img src="img/SOSO_robot_utskjært.png" alt="SOSO Robot Kit">
-            </div>
-            <div class="robot-left">
-                <img src="img/SOSO_robot_utskjært2.png" alt="SOSO Robot Kit venstre">
-            </div>
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- Image Slider Section -->
+    <section id="gallery" class="image-slider">
+        <div class="container">
+            <h2 class="section-title">Se Robotkittet i Aksjon</h2>
+            <p class="section-subtitle">Bla gjennom bildene for å se detaljer</p>
+            
+            <div class="slider-container">
+                <div class="slider-wrapper" id="sliderWrapper">
+                    <div class="slide">
+                        <img src="img/bilde1.png" alt="Robot bilde 1">
+                    </div>
+                    <div class="slide">
+                        <img src="img/bilde2.png" alt="Robot bilde 2">
+                    </div>
+                    <div class="slide">
+                        <img src="img/bilde3.png" alt="Robot bilde 3">
+                    </div>
+                    <div class="slide">
+                        <img src="img/bilde4.png" alt="Robot bilde 4">
+                    </div>
+                    <div class="slide">
+                        <img src="img/bilde5.png" alt="Robot bilde 5">
+                    </div>
+                </div>
+                
+                <div class="slider-nav">
+                    <button class="slider-btn" onclick="previousSlide()">‹</button>
+                    <button class="slider-btn" onclick="nextSlide()">›</button>
+                </div>
+            </div>
+            
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
     <section id="products" class="products">
         <div class="container">
             <h2 class="section-title">Vårt Robotkitt</h2>
-            <p class="section-subtitle">Alt du trenger i én komplett pakke</p>
+            <p class="section-subtitle">Velg pakken som passer deg best</p>
 
             <div class="product-grid">
-                <!-- Single Product -->
-                <div class="product-card" style="grid-column: 1 / -1; max-width: 800px; margin: 0 auto;">
+                <!-- Enkeltpakke -->
+                <div class="product-card">
                     <span class="product-icon">🤖</span>
-                    <h3 class="product-name">SOSO KOMPLETT ROBOTKITT</h3>
+                    <h3 class="product-name">KOMPLETT ROBOTKITT</h3>
                     <p class="product-description">
-                        Alt du trenger for å bygge og programmere din egen robot! Dette komplett-settet 
-                        inneholder alle komponenter, sensorer og verktøy for både nybegynnere og erfarne byggere.
+                        Alt du trenger for å bygge og programmere din egen robot! Perfekt for hobbyister og elever.
                     </p>
                     <ul class="product-features">
                         <li>Chassi, belter og hjul</li>
@@ -772,22 +927,97 @@
                         <li>Linjesensor for baneføling</li>
                         <li>2x DC motorer med hjul + driver</li>
                         <li>Summer for lydeffekter</li>
-                        <li>Batteripakke (aaa)</li>
+                        <li>Batteripakke (AAA)</li>
                         <li>Mikrocontroller med Wi-Fi/Bluetooth</li>
                         <li>Alle kabler og monteringsdeler</li>
-                        <li>åpen kildekode og Aurduino IDE veiledning</li>
+                        <li>Åpen kildekode og Arduino IDE veiledning</li>
                         <li>Komplett manual på norsk</li>
                     </ul>
-                    <div class="product-price">849,-</div>
-                    <button class="btn btn-primary" onclick="selectProduct('SOSO Komplett Robotkitt', 849)">
+                    <div class="product-price">749,-</div>
+                    <button class="btn btn-primary" onclick="selectProduct('komplett', 'SOSO Komplett Robotkitt', 749)">
                         <span>Bestill Nå!</span>
+                    </button>
+                </div>
+
+                <!-- STL-filer pakke -->
+                <div class="product-card">
+                    <span class="product-icon">🖨️</span>
+                    <h3 class="product-name">STL-FILER PAKKE</h3>
+                    <p class="product-description">
+                        Har du allerede en 3D-printer? Kjøp kun STL-filene og print delene selv!
+                    </p>
+                    <ul class="product-features">
+                        <li>Komplette STL-filer for alle printbare deler</li>
+                        <li>Chassi og monteringsdeler</li>
+                        <li>Holder for sensorer og elektronikk</li>
+                        <li>Hjuladaptere og støtter</li>
+                        <li>Detaljert printguide</li>
+                        <li>Komponentliste for kjøp av elektronikk</li>
+                        <li>Monteringsveiledning</li>
+                        <li>Oppdateringer inkludert</li>
+                    </ul>
+                    <div class="product-price">300,-</div>
+                    <button class="btn btn-primary" onclick="selectProduct('stl', 'STL-filer Pakke', 300)">
+                        <span>Kjøp STL-filer</span>
+                    </button>
+                </div>
+
+                <!-- Skolepakke 10 stk -->
+                <div class="product-card">
+                    <span class="school-badge">🎓 Skolepakke</span>
+                    <span class="product-icon">🏫</span>
+                    <h3 class="product-name">SKOLEPAKKE - 10 STK</h3>
+                    <p class="product-description">
+                        Perfekt for klasserom og gruppeundervisning. Inneholder 10 komplette robotkitt pluss ekstra ressurser for lærere.
+                    </p>
+                    <ul class="product-features">
+                        <li>10x komplette robotkitt</li>
+                        <li>STL-filer for 3D-printing av ekstra deler</li>
+                        <li>Ekstra utstyr og reservedeler</li>
+                        <li>Lærerveiledning og undervisningsopplegg</li>
+                        <li>Oppgaver og prosjektidéer</li>
+                        <li>Prioritert support for skoler</li>
+                        <li>Faktura med 30 dagers betalingsfrist</li>
+                    </ul>
+                    <div class="product-price">6.500,-</div>
+                    <p style="color: var(--primary); font-weight: 700; margin-bottom: 1rem;">
+                        Spar 1.990,- ved å kjøpe skolepakken!
+                    </p>
+                    <button class="btn btn-primary" onclick="selectProduct('skole10', 'Skolepakke - 10 stk', 6500)">
+                        <span>Bestill Skolepakke</span>
+                    </button>
+                </div>
+
+                <!-- Skolepakke 20 stk -->
+                <div class="product-card">
+                    <span class="school-badge">🎓 Stor Skolepakke</span>
+                    <span class="product-icon">🏛️</span>
+                    <h3 class="product-name">SKOLEPAKKE - 20 STK</h3>
+                    <p class="product-description">
+                        Vår største pakke for skoler og institusjoner. Perfekt for flere klasser eller store grupper.
+                    </p>
+                    <ul class="product-features">
+                        <li>20x komplette robotkitt</li>
+                        <li>STL-filer for 3D-printing av ekstra deler</li>
+                        <li>Ekstra utstyr og reservedeler (dobbelt)</li>
+                        <li>Utvidet lærerveiledning</li>
+                        <li>Komplett oppgavebank og prosjekter</li>
+                        <li>Prioritert support og opplæring</li>
+                        <li>Faktura med 30 dagers betalingsfrist</li>
+                        <li>Gratis frakt!</li>
+                    </ul>
+                    <div class="product-price">11.000,-</div>
+                    <p style="color: var(--primary); font-weight: 700; margin-bottom: 1rem;">
+                        Spar 5.980,- ved å kjøpe stor skolepakke!
+                    </p>
+                    <button class="btn btn-primary" onclick="selectProduct('skole20', 'Skolepakke - 20 stk', 11000)">
+                        <span>Bestill Stor Skolepakke</span>
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
     <section id="features" class="features">
         <div class="container">
             <h2 class="section-title">Hvorfor Velge SOSO?</h2>
@@ -810,21 +1040,20 @@
                     <div class="feature-icon">💻</div>
                     <h3 class="feature-title">Fleksibel Koding</h3>
                     <p class="feature-description">
-                        Åpen kildekode med Aurduino IDE – og mulighet til videreutvikling
+                        Åpen kildekode med Arduino IDE – og mulighet til videreutvikling
                     </p>
                 </div>
                 <div class="feature-item">
                     <div class="feature-icon">🌟</div>
                     <h3 class="feature-title">Lokalt og liten bedrift</h3>
                     <p class="feature-description">
-                        Støtt våres elevbedrift og hjelp oss med å gjøre læring mer kreativt
+                        Støtt vår elevbedrift og hjelp oss med å gjøre læring mer kreativt
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Order Section -->
     <section id="order" class="order-section">
         <div class="container">
             <div class="order-content">
@@ -833,8 +1062,8 @@
 
                 <form class="order-form" onsubmit="handleSubmit(event)">
                     <div class="form-group">
-                        <label for="name">Fullt Navn</label>
-                        <input type="text" id="name" name="name" required placeholder="Ola Nordmann">
+                        <label for="name">Fullt Navn / Skolenavn</label>
+                        <input type="text" id="name" name="name" required placeholder="Ola Nordmann / Oslo Skole">
                     </div>
 
                     <div class="form-group">
@@ -849,15 +1078,22 @@
 
                     <div class="form-group">
                         <label for="product">Velg Produkt</label>
-                        <select id="product" name="product" required>
-                            <option value="">-- Velg et kit --</option>
-                            <option value="komplett" data-price="2499">SOSO Komplett Robotkitt - 849,-</option>
+                        <select id="product" name="product" required onchange="updateTotal()">
+                            <option value="">-- Velg en pakke --</option>
+                            <option value="komplett" data-price="849">Komplett Robotkitt - 849,-</option>
+                            <option value="stl" data-price="300">STL-filer Pakke - 300,-</option>
+                            <option value="skole10" data-price="6500">Skolepakke 10 stk - 6.500,-</option>
+                            <option value="skole20" data-price="11000">Skolepakke 20 stk - 11.000,-</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="quantity">Antall</label>
-                        <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                        <input type="number" id="quantity" name="quantity" min="1" value="1" required onchange="updateTotal()">
+                    </div>
+
+                    <div class="total-price" id="totalPrice">
+                        Total: 0,-
                     </div>
 
                     <div class="form-group">
@@ -884,7 +1120,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -904,7 +1139,53 @@
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Image Slider
+        let currentSlide = 0;
+        const totalSlides = 5;
+
+        function initSlider() {
+            const dotsContainer = document.getElementById('sliderDots');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (i === 0) dot.classList.add('active');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function updateSlider() {
+            const wrapper = document.getElementById('sliderWrapper');
+            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        // Auto-advance slider
+        setInterval(nextSlide, 5000);
+
+        // Initialize slider on page load
+        initSlider();
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -919,16 +1200,15 @@
         });
 
         // Select product function
-        function selectProduct(productName, price) {
+        function selectProduct(value, productName, price) {
             const productSelect = document.getElementById('product');
-            productSelect.value = 'komplett';
+            productSelect.value = value;
+            updateTotal();
             
-            // Scroll to order form
             document.getElementById('order').scrollIntoView({
                 behavior: 'smooth'
             });
 
-            // Add a highlight effect
             const orderForm = document.querySelector('.order-form');
             orderForm.style.boxShadow = '0 0 50px rgba(255, 107, 53, 0.5)';
             setTimeout(() => {
@@ -936,19 +1216,34 @@
             }, 2000);
         }
 
+        // Update total price
+        function updateTotal() {
+            const productSelect = document.getElementById('product');
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+            
+            if (selectedOption && selectedOption.dataset.price) {
+                const price = parseInt(selectedOption.dataset.price);
+                const total = price * quantity;
+                document.getElementById('totalPrice').textContent = `Total: ${total.toLocaleString('no-NO')},-`;
+            } else {
+                document.getElementById('totalPrice').textContent = 'Total: 0,-';
+            }
+        }
+
         // Handle form submission
         function handleSubmit(event) {
             event.preventDefault();
             
-            // Get form data
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData);
             
-            // Get product name from select element
             const productSelect = document.getElementById('product');
             const productName = productSelect.options[productSelect.selectedIndex].text;
+            const price = parseInt(productSelect.options[productSelect.selectedIndex].dataset.price);
+            const quantity = parseInt(data.quantity);
+            const total = price * quantity;
             
-            // Prepare email parameters
             const emailParams = {
                 to_email: 'isak70018@gmail.com',
                 from_name: data.name,
@@ -956,44 +1251,36 @@
                 phone: data.phone,
                 product: productName,
                 quantity: data.quantity,
+                total_price: total.toLocaleString('no-NO') + ',-',
                 address: data.address,
                 message: data.message || 'Ingen melding',
                 order_date: new Date().toLocaleString('no-NO')
             };
             
-            // Show loading state
             const submitButton = event.target.querySelector('button[type="submit"]');
             const originalButtonText = submitButton.innerHTML;
             submitButton.innerHTML = '<span>Sender...</span>';
             submitButton.disabled = true;
             
-            // Send email using EmailJS
             emailjs.send('service_oh69nxg', 'template_qrwrtia', emailParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
                     
-                    // Show success message
                     const successMessage = document.getElementById('successMessage');
                     successMessage.classList.add('show');
-                    
-                    // Hide form
                     event.target.style.display = 'none';
                     
-                    // Log order
-                    console.log('Order sent to isak70018@gmail.com:', data);
-                    
-                    // Reset form and button after delay
                     setTimeout(() => {
                         event.target.reset();
                         event.target.style.display = 'block';
                         successMessage.classList.remove('show');
                         submitButton.innerHTML = originalButtonText;
                         submitButton.disabled = false;
+                        updateTotal();
                     }, 30000);
                 }, function(error) {
                     console.log('FAILED...', error);
                     
-                    // Fallback: create mailto link with order info
                     const subject = encodeURIComponent('Ny bestilling - SOSO Robotkitt');
                     const body = encodeURIComponent(`
 BESTILLINGSINFORMASJON
@@ -1005,6 +1292,7 @@ Telefon: ${data.phone}
 
 Produkt: ${productName}
 Antall: ${data.quantity}
+Total pris: ${total.toLocaleString('no-NO')},-
 
 Leveringsadresse:
 ${data.address}
@@ -1015,38 +1303,24 @@ ${data.message || 'Ingen melding'}
 Bestilt: ${new Date().toLocaleString('no-NO')}
                     `);
                     
-                    // Open default email client
                     window.location.href = `mailto:soso.ungdomsbedrift@gmail.com?subject=${subject}&body=${body}`;
                     
-                    // Show success message anyway
                     const successMessage = document.getElementById('successMessage');
                     successMessage.classList.add('show');
                     event.target.style.display = 'none';
                     
-                    // Reset
                     setTimeout(() => {
                         event.target.reset();
                         event.target.style.display = 'block';
                         successMessage.classList.remove('show');
                         submitButton.innerHTML = originalButtonText;
                         submitButton.disabled = false;
+                        updateTotal();
                     }, 5000);
                 });
         }
 
-        // Update quantity and calculate total
-        document.getElementById('quantity')?.addEventListener('input', function() {
-            const productSelect = document.getElementById('product');
-            const selectedOption = productSelect.options[productSelect.selectedIndex];
-            if (selectedOption && selectedOption.dataset.price) {
-                const price = parseInt(selectedOption.dataset.price);
-                const quantity = parseInt(this.value) || 1;
-                const total = price * quantity;
-                console.log(`Total: ${total},-`);
-            }
-        });
-
-        // Add parallax effect to orbs
+        // Parallax effect
         document.addEventListener('mousemove', (e) => {
             const orbs = document.querySelectorAll('.orb');
             const mouseX = e.clientX / window.innerWidth;
@@ -1062,8 +1336,3 @@ Bestilt: ${new Date().toLocaleString('no-NO')}
     </script>
 </body>
 </html>
-
-
-
-
-
