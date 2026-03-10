@@ -1052,12 +1052,12 @@
                 <form class="order-form" onsubmit="handleSubmit(event)">
                     <div class="form-group">
                         <label for="name">Fullt Navn / Skolenavn</label>
-                        <input type="text" id="name" name="name" required placeholder="Ola Nordmann / Oslo Skole">
+                        <input type="text" id="name" name="name" required placeholder="Anners Nordmann / Oslo Skole">
                     </div>
 
                     <div class="form-group">
                         <label for="email">E-post</label>
-                        <input type="email" id="email" name="email" required placeholder="ola@example.com">
+                        <input type="email" id="email" name="email" required placeholder="Anners@example.com">
                     </div>
 
                     <div class="form-group">
@@ -1069,7 +1069,7 @@
                         <label for="product">Velg Produkt</label>
                         <select id="product" name="product" required onchange="updateTotal()">
                             <option value="">-- Velg en pakke --</option>
-                            <option value="komplett" data-price="849">Komplett Robotkitt - 749,-</option>
+                            <option value="komplett" data-price="749">Komplett Robotkitt - 749,-</option>
                             <option value="stl" data-price="300">STL-filer Pakke - 300,-</option>
                             <option value="skole10" data-price="6500">Skolepakke 10 stk - 6.500,-</option>
                         </select>
@@ -1340,6 +1340,7 @@ Bestilt: ${new Date().toLocaleString('no-NO')}
     </script>
 </body>
 </html>
+
 
 
 
